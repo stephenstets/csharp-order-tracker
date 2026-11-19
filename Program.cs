@@ -1,5 +1,7 @@
 namespace OrderTracker;
 
+using System.Globalization;
+
 /// <summary>
 /// Order tracker for a small shop — console app.
 ///
@@ -25,6 +27,10 @@ internal static class Program
 
     private static void Main()
     {
+        // Pin currency formatting to US dollars so prices print as $35.00
+        // on any machine, whatever its system locale is.
+        CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-US");
+
         var store = new OrderStore("orders.json");
         store.Load();
         Console.WriteLine($"Loaded {store.Orders.Count} order(s) from orders.json.");
